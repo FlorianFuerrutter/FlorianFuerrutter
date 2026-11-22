@@ -1,0 +1,38 @@
+name: Update research profile and deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 5 * * 1" # Every Monday at 05:23 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  update-render-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Refresh publication metrics and create svg
+        run: python scripts/generate_svg.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add out/
+          git diff --cached --quiet || git commit -m "Update research profile data"
+          git push
+
