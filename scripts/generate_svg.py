@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 import os
@@ -32,6 +33,7 @@ class ScholarProfile:
     name: str
     affiliation: str
     fields: List[str]
+    source: str = "Google Scholar"
     citations: str = "—"
     h_index: str = "—"
     i10_index: str = "—"
@@ -272,6 +274,109 @@ def fetch_profile(user_id: str, timeout: int = 20) -> ScholarProfile:
     return parse_profile_html(user_id, html)
 
 
+def fetch_openalex_profile(
+    author_id: str, timeout: int = 20, max_papers: int = 8
+) -> ScholarProfile:
+    """Fetch an author and their most-cited works from the OpenAlex API."""
+    author_id = author_id.strip().rstrip("/").rsplit("/", 1)[-1]
+    if not re.fullmatch(r"A\d+", author_id):
+        raise ValueError("OpenAlex author ID must be in the form A1234567890.")
+
+    headers = {
+        "User-Agent": (
+            "ResearchProject/1.0 "
+            "(mailto:90468339+FlorianFuerrutter@users.noreply.github.com)"
+        )
+    }
+
+    def fetch_json(url: str) -> Dict[str, object]:
+        try:
+            with urlopen(Request(url, headers=headers), timeout=timeout) as response:
+                data = json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            raise RuntimeError(f"OpenAlex returned HTTP {exc.code}: {exc.reason}") from exc
+        except (URLError, TimeoutError) as exc:
+            raise RuntimeError(f"Could not retrieve OpenAlex data: {exc}") from exc
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise RuntimeError(f"OpenAlex returned invalid JSON: {exc}") from exc
+        if not isinstance(data, dict):
+            raise RuntimeError("OpenAlex returned an unexpected JSON response.")
+        return data
+
+    author_url = f"https://api.openalex.org/authors/{author_id}"
+    author = fetch_json(author_url)
+    name = author.get("display_name")
+    if not isinstance(name, str) or not name:
+        raise RuntimeError("OpenAlex author response did not include a display name.")
+
+    stats = author.get("summary_stats") or {}
+    if not isinstance(stats, dict):
+        stats = {}
+    institutions = author.get("last_known_institutions") or []
+    affiliation = ", ".join(
+        institution["display_name"]
+        for institution in institutions
+        if isinstance(institution, dict) and institution.get("display_name")
+    ) or "Research profile"
+    topics = author.get("topics") or []
+    fields = [
+        # topic["display_name"]
+        # for topic in topics[:3]
+        # if isinstance(topic, dict) and topic.get("display_name")
+    ]
+
+    works_query = urlencode({
+        "filter": f"author.id:{author_id}",
+        "sort": "cited_by_count:desc",
+        "per-page": min(max_papers, 200),
+        "select": "title,authorships,primary_location,publication_year,cited_by_count",
+    })
+    works_data = fetch_json(f"https://api.openalex.org/works?{works_query}")
+    works = works_data.get("results")
+    if not isinstance(works, list):
+        raise RuntimeError("OpenAlex works response did not include a results list.")
+
+    publications: List[Publication] = []
+    for work in works:
+        if not isinstance(work, dict) or not work.get("title"):
+            continue
+        authorships = work.get("authorships") or []
+        authors = ", ".join(
+            authorship["author"]["display_name"]
+            for authorship in authorships
+            if isinstance(authorship, dict)
+            and isinstance(authorship.get("author"), dict)
+            and authorship["author"].get("display_name")
+        )
+        location = work.get("primary_location") or {}
+        venue = ""
+        if isinstance(location, dict):
+            source = location.get("source") or {}
+            if isinstance(source, dict):
+                venue = source.get("display_name") or ""
+        publications.append(
+            Publication(
+                title=work["title"],
+                authors=authors,
+                venue=venue,
+                year=str(work["publication_year"]) if work.get("publication_year") else "",
+                citations=work.get("cited_by_count") or 0,
+            )
+        )
+
+    return ScholarProfile(
+        user_id=author_id,
+        name=name,
+        affiliation=affiliation,
+        fields=fields,
+        source="OpenAlex",
+        citations=str(author.get("cited_by_count", "—")),
+        h_index=str(stats.get("h_index", "—")),
+        i10_index=str(stats.get("i10_index", "—")),
+        publications=publications,
+    )
+
+
 def svg_text(
     x: int,
     y: int,
@@ -325,8 +430,8 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
     research_fields = " · ".join(x for x in profile.fields if x)
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="{height}" viewBox="0 0 1100 {height}" role="img" aria-labelledby="title desc">',
-        f'<title id="title">Google Scholar profile: {escape(profile.name)}</title>',
-        '<desc id="desc">A summary of Google Scholar citation metrics and selected publications.</desc>',
+        f'<title id="title">{escape(profile.source)} profile: {escape(profile.name)}</title>',
+        f'<desc id="desc">A summary of {escape(profile.source)} citation metrics and selected publications.</desc>',
         f'<rect width="1100" height="{height}" rx="28" fill="{c["bg"]}"/>',
         f'<rect x="1" y="1" width="1098" height="{height - 2}" rx="27" fill="none" stroke="{c["border"]}"/>',
         svg_text(56, 119, shorten(profile.name, 52), 34, c["text"], 700),
@@ -386,7 +491,7 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
 
     footer_y = height - 30
     out.extend([
-        svg_text(56, footer_y, "DATA SOURCE  ·  PUBLIC GOOGLE SCHOLAR PROFILE", 10, c["muted"], 600, letter_spacing=0.9),
+        svg_text(56, footer_y, f"DATA SOURCE  ·  {profile.source.upper()} PROFILE", 10, c["muted"], 600, letter_spacing=0.9),
         svg_text(1044, footer_y, f"UPDATED {datetime.now(timezone.utc).strftime('%Y-%m-%d')} UTC", 10, c["muted"], 600, "end", 0.8),
         "</svg>",
     ])
@@ -395,10 +500,19 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate a modern GitHub README SVG from a public Google Scholar profile."
+        description="Generate a modern GitHub README SVG from a public research profile."
     )
-    parser.add_argument("--profile", default="c7ALphMAAAAJ", help="Google Scholar profile URL or the value of its 'user' parameter")
-    parser.add_argument("-o", "--output", default="out/profile.svg", help="Output SVG filename (default: scholar.svg)")
+    parser.add_argument(
+        "--profile",
+        default="c7ALphMAAAAJ",
+        help="Google Scholar profile URL or the value of its 'user' parameter (primary source)",
+    )
+    parser.add_argument(
+        "--openalex-author",
+        default="A5093211931",
+        help="OpenAlex author ID or URL used if Google Scholar is unavailable",
+    )
+    parser.add_argument("-o", "--output", default="out/profile.svg", help="Output SVG filename (default: profile.svg)")
     parser.add_argument("--max-papers", type=int, default=8, help="Maximum publications shown (default: 8)")
     parser.add_argument("--theme", choices=["dark", "light"], default="light", help="SVG color theme")
     parser.add_argument("--timeout", type=int, default=20, help="HTTP request timeout in seconds")
@@ -411,7 +525,26 @@ def main() -> int:
 
     try:
         user_id = parse_profile_id(args.profile)
-        profile = fetch_profile(user_id, timeout=args.timeout)
+        try:
+            raise RuntimeError()
+            #profile = fetch_profile(user_id, timeout=args.timeout)
+
+        except RuntimeError as scholar_error:
+            print(
+                f"Google Scholar unavailable ({scholar_error}); trying OpenAlex.",
+                file=sys.stderr,
+            )
+            try:
+                profile = fetch_openalex_profile(
+                    args.openalex_author,
+                    timeout=args.timeout,
+                    max_papers=args.max_papers,
+                )
+            except (ValueError, RuntimeError) as openalex_error:
+                raise RuntimeError(
+                    f"Google Scholar failed: {scholar_error}; "
+                    f"OpenAlex fallback failed: {openalex_error}"
+                ) from openalex_error
         svg = make_svg(profile, max_papers=args.max_papers, theme=args.theme)
         os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
         with open(args.output, "w", encoding="utf-8") as file:
