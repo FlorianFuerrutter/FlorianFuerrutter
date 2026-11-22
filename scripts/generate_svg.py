@@ -381,7 +381,7 @@ def svg_text(
     x: int,
     y: int,
     value: str,
-    size: int,
+    size: int | float,
     color: str,
     weight: int = 400,
     anchor: str = "start",
@@ -390,7 +390,7 @@ def svg_text(
     spacing = f' letter-spacing="{letter_spacing}"' if letter_spacing is not None else ""
     return (
         f'<text x="{x}" y="{y}" fill="{color}" font-family="Inter, Segoe UI, Arial, sans-serif" '
-        f'font-size="{size}" font-weight="{weight}" text-anchor="{anchor}"{spacing}>'
+        f'font-size="{int(size)}" font-weight="{weight}" text-anchor="{anchor}"{spacing}>'
         f"{escape(value)}</text>"
     )
 
@@ -412,7 +412,7 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
     row_start = 388
     row_count = max(1, len(papers))
     # Keep a consistent breathing space between the final row and the footer.
-    height = row_start + row_count * row_height + (row_count - 1) * row_gap + 112
+    height = row_start + row_count * row_height + (row_count - 1) * row_gap + 50 #112
 
     if theme == "light":
         c = {
@@ -427,6 +427,9 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
             "accent": "#67E8F9", "accent_bg": "#123344", "green": "#6EE7B7",
         }
 
+    dy = -40
+    t_scale = 1.45
+
     research_fields = " · ".join(x for x in profile.fields if x)
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="{height}" viewBox="0 0 1100 {height}" role="img" aria-labelledby="title desc">',
@@ -434,11 +437,13 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
         f'<desc id="desc">A summary of {escape(profile.source)} citation metrics and selected publications.</desc>',
         f'<rect width="1100" height="{height}" rx="28" fill="{c["bg"]}"/>',
         f'<rect x="1" y="1" width="1098" height="{height - 2}" rx="27" fill="none" stroke="{c["border"]}"/>',
-        svg_text(56, 119, shorten(profile.name, 52), 34, c["text"], 700),
-        svg_text(57, 151, shorten("PhD Student, " + profile.affiliation, 105), 15, c["accent"], 400),
+        svg_text(56, 119+dy, shorten(profile.name, 52), 34*t_scale, c["text"], 700),
+        svg_text(57, 161+dy, shorten("PhD Student, " + profile.affiliation, 105), 15*t_scale, c["accent"], 400),
         # Research fields are anchored to the right edge for a clean header alignment.
-        svg_text(1044, 151, shorten(research_fields, 76), 15, c["muted"], 400, "end"),
+        svg_text(1044, 151+dy, shorten(research_fields, 76), 15, c["muted"], 400, "end"),
     ]
+
+    dy = -30
 
     metric_data = [
         ("TOTAL CITATIONS", profile.citations),
@@ -449,12 +454,12 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
     for i, (label, value) in enumerate(metric_data):
         x = 56 + i * (card_w + gap)
         out.extend([
-            f'<rect x="{x}" y="{card_y}" width="{card_w}" height="{card_h}" rx="16" fill="{c["panel"]}" stroke="{c["border"]}"/>',
-            svg_text(x + 20, card_y + 30, label, 11, c["muted"], 700, letter_spacing=1.2),
-            svg_text(x + 20, card_y + 72, value, 29, c["text"], 700),
+            f'<rect x="{x}" y="{card_y+dy}" width="{card_w}" height="{card_h}" rx="16" fill="{c["panel"]}" stroke="{c["border"]}"/>',
+            svg_text(x + 20, card_y + 30+dy, label, 11*t_scale*0.9, c["muted"], 700, letter_spacing=1.2),
+            svg_text(x + 20, card_y + 72+dy, value, 29*t_scale*0.9, c["text"], 700),
         ])
 
-    section_y = 329
+    section_y = 329 + dy
     out.extend([
         f'<path d="M56 {section_y}H1044" stroke="{c["border"]}"/>',
         svg_text(56, section_y + 39, "SELECTED PUBLICATIONS", 14, c["text"], 700, letter_spacing=1.3),
@@ -462,7 +467,7 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
 
     if papers:
         for i, paper in enumerate(papers):
-            y = row_start + i * row_step
+            y = row_start + i * row_step + dy
             publication_info = (paper.venue or "").strip()
             if paper.year and publication_info:
                 # The year already has its own right-aligned column; avoid repeating it.
@@ -489,7 +494,8 @@ def make_svg(profile: ScholarProfile, max_papers: int = 8, theme: str = "dark") 
             svg_text(78, y + 54, "No publications could be read from this profile page.", 14, c["muted"], 400),
         ])
 
-    footer_y = height - 30
+    dy = -0
+    footer_y = height - 30 + dy
     out.extend([
         svg_text(56, footer_y, f"DATA SOURCE  ·  {profile.source.upper()} PROFILE", 10, c["muted"], 600, letter_spacing=0.9),
         svg_text(1044, footer_y, f"UPDATED {datetime.now(timezone.utc).strftime('%Y-%m-%d')} UTC", 10, c["muted"], 600, "end", 0.8),
