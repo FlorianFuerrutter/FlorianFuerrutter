@@ -253,11 +253,9 @@ def fetch_profile(user_id: str, timeout: int = 20) -> ScholarProfile:
     """Fetch and parse a public Google Scholar profile using urllib."""
     query = urlencode({"user": user_id, "hl": "en", "cstart": 0, "pagesize": 100})
     url = f"https://scholar.google.com/citations?{query}"
+
     headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-        ),
+        "User-Agent": "Mozilla/5.0 (compatible; ResearchProject/1.0; contact: 90468339+FlorianFuerrutter@users.noreply.github.com",
         "Accept-Language": "en-US,en;q=0.9",
     }
     request = Request(url, headers=headers)
