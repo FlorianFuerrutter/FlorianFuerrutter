@@ -1,49 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="812" viewBox="0 0 1100 812" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="750" viewBox="0 0 1100 750" role="img" aria-labelledby="title desc">
 <title id="title">OpenAlex profile: Florian Fürrutter</title>
 <desc id="desc">A summary of OpenAlex citation metrics and selected publications.</desc>
-<rect width="1100" height="812" rx="28" fill="#F3F6FB"/>
-<rect x="1" y="1" width="1098" height="810" rx="27" fill="none" stroke="#E2E8F0"/>
-<text x="56" y="119" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" text-anchor="start">Florian Fürrutter</text>
-<text x="57" y="151" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">PhD Student, Universität Innsbruck</text>
-<text x="1044" y="151" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="end"></text>
-<rect x="56" y="184" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
-<text x="76" y="214" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1.2">TOTAL CITATIONS</text>
-<text x="76" y="256" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start">110</text>
-<rect x="392" y="184" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
-<text x="412" y="214" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1.2">H-INDEX</text>
-<text x="412" y="256" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start">3</text>
-<rect x="728" y="184" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
-<text x="748" y="214" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1.2">i10-INDEX</text>
-<text x="748" y="256" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start">2</text>
-<path d="M56 329H1044" stroke="#E2E8F0"/>
-<text x="56" y="368" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.3">SELECTED PUBLICATIONS</text>
-<rect x="56" y="388" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
-<text x="77" y="426" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">01</text>
-<text x="119" y="417" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Quantum circuit synthesis with diffusion models</text>
-<text x="119" y="442" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Florian Fürrutter, Gorka Muñoz-Gil, Hans J. Briegel</text>
-<text x="119" y="465" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Nature Machine Intelligence</text>
-<text x="944" y="430" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">94</text>
-<text x="944" y="453" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
-<text x="1020" y="430" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2024</text>
-<text x="1020" y="453" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
-<rect x="56" y="496" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
-<text x="77" y="534" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">02</text>
-<text x="119" y="525" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Synthesis of discrete–continuous quantum circuits with multimodal diffusion models</text>
-<text x="119" y="550" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Florian Fürrutter, Zohim Chandani, Ikko Hamamura, Hans J. Briegel, Gorka Muñoz-Gil</text>
-<text x="119" y="573" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Machine Learning Science and Technology</text>
-<text x="944" y="538" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">11</text>
-<text x="944" y="561" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
-<text x="1020" y="538" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2026</text>
-<text x="1020" y="561" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
-<rect x="56" y="604" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
-<text x="77" y="642" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">03</text>
-<text x="119" y="633" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Disentanglement by means of action-induced representations</text>
-<text x="119" y="658" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Gorka Muñoz-Gil, Hendrik Poulsen Nautrup, Arunava Majumder, Paulin de Schoulepnikoff, Florian Fürrutter, Marius Krumm, Hans J. Briegel</text>
-<text x="119" y="681" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">arXiv (Cornell University)</text>
-<text x="944" y="646" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">2</text>
-<text x="944" y="669" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
-<text x="1020" y="646" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2026</text>
-<text x="1020" y="669" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
-<text x="56" y="782" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" letter-spacing="0.9">DATA SOURCE  ·  OPENALEX PROFILE</text>
-<text x="1044" y="782" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="end" letter-spacing="0.8">UPDATED 2026-11-22 UTC</text>
+<rect width="1100" height="750" rx="28" fill="#F3F6FB"/>
+<rect x="1" y="1" width="1098" height="748" rx="27" fill="none" stroke="#E2E8F0"/>
+<text x="56" y="79" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="49" font-weight="700" text-anchor="start">Florian Fürrutter</text>
+<text x="57" y="121" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="21" font-weight="400" text-anchor="start">PhD Student, Universität Innsbruck</text>
+<text x="1044" y="111" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="end"></text>
+<rect x="56" y="154" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="76" y="184" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.2">TOTAL CITATIONS</text>
+<text x="76" y="226" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="37" font-weight="700" text-anchor="start">110</text>
+<rect x="392" y="154" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="412" y="184" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.2">H-INDEX</text>
+<text x="412" y="226" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="37" font-weight="700" text-anchor="start">3</text>
+<rect x="728" y="154" width="316" height="94" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="748" y="184" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.2">i10-INDEX</text>
+<text x="748" y="226" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="37" font-weight="700" text-anchor="start">2</text>
+<path d="M56 299H1044" stroke="#E2E8F0"/>
+<text x="56" y="338" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.3">SELECTED PUBLICATIONS</text>
+<rect x="56" y="358" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
+<text x="77" y="396" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">01</text>
+<text x="119" y="387" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Quantum circuit synthesis with diffusion models</text>
+<text x="119" y="412" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Florian Fürrutter, Gorka Muñoz-Gil, Hans J. Briegel</text>
+<text x="119" y="435" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Nature Machine Intelligence</text>
+<text x="944" y="400" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">94</text>
+<text x="944" y="423" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
+<text x="1020" y="400" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2024</text>
+<text x="1020" y="423" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
+<rect x="56" y="466" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
+<text x="77" y="504" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">02</text>
+<text x="119" y="495" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Synthesis of discrete–continuous quantum circuits with multimodal diffusion models</text>
+<text x="119" y="520" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Florian Fürrutter, Zohim Chandani, Ikko Hamamura, Hans J. Briegel, Gorka Muñoz-Gil</text>
+<text x="119" y="543" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Machine Learning Science and Technology</text>
+<text x="944" y="508" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">11</text>
+<text x="944" y="531" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
+<text x="1020" y="508" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2026</text>
+<text x="1020" y="531" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
+<rect x="56" y="574" width="988" height="96" rx="13" fill="#F7F9FC" stroke="#E2E8F0"/>
+<text x="77" y="612" fill="#2563EB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">03</text>
+<text x="119" y="603" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="650" text-anchor="start">Disentanglement by means of action-induced representations</text>
+<text x="119" y="628" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Gorka Muñoz-Gil, Hendrik Poulsen Nautrup, Arunava Majumder, Paulin de Schoulepnikoff, Florian Fürrutter, Marius Krumm, Hans J. Briegel</text>
+<text x="119" y="651" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">arXiv (Cornell University)</text>
+<text x="944" y="616" fill="#12805C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="end">2</text>
+<text x="944" y="639" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">CITATIONS</text>
+<text x="1020" y="616" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" text-anchor="end">2026</text>
+<text x="1020" y="639" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="end" letter-spacing="0.8">YEAR</text>
+<text x="56" y="720" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="start" letter-spacing="0.9">DATA SOURCE  ·  OPENALEX PROFILE</text>
+<text x="1044" y="720" fill="#68758A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="end" letter-spacing="0.8">UPDATED 2026-11-22 UTC</text>
 </svg>
